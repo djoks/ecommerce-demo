@@ -36,7 +36,11 @@ struct EcommerceDemoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ProductListView()  // 👈 Your actual starting screen
+                // 👈 Your actual starting screen
+                let apiService = APIService()
+                let repository = ProductRepository(apiService: apiService)
+                let viewModel = ProductListViewModel(productRepository: repository)
+                ProductListView(viewModel: viewModel)
             }
         }
         .modelContainer(sharedModelContainer)
